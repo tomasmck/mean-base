@@ -33,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
-//var routes = require('./routes/index');
+var routes = require('./routes/index')(app, passport, auth);
 var users = require('./routes/users')(app, passport, auth);
 
 // Bootstrap routes
