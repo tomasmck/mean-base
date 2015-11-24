@@ -1,8 +1,27 @@
 var express = require('express');
 var router = express.Router();
-var userController = require('../app/controllers/users')
+var userController = require('../app/controllers/users');
+var async = require('async');
 
-/* GET users listing. */
-router.post('/', userController.createUser);
+module.exports = function (app, passport, auth) {
 
-module.exports = router;
+    app.post('/api/users/session', passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/'
+    }));
+
+    app.get('/auth/steam',
+        passport.authenticate('steam'),
+        function(req, res) {
+            // The request will be redirected to Steam for authentication, so
+            // this function will not be called.
+        });
+
+    app.get('/auth/steam/return',
+        passport.authenticate('steam', { failureRedirect: '/login' }),
+        function(req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('/');
+        });
+
+};

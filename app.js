@@ -4,9 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
+var passport = require('passport');
+var auth = require('./config/middlewares/authorization');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// Bootstrap models
+var models_path = __dirname + '/app/models';
+fs.readdirSync(models_path).forEach(function (file) {
+  require(models_path+'/'+file)
+});
+
+
 
 var app = express();
 
@@ -21,9 +29,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/', routes);
-app.use('/users', users);
+require('./config/passport')(passport);
+//var routes = require('./routes/index');
+var users = require('./routes/users')(app, passport, auth);
+
+// Bootstrap routes
+//require('./routes')(app, passport, auth);
+
+//app.use('/', routes);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

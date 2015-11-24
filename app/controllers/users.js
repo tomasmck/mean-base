@@ -7,6 +7,7 @@ var http = require('http')
 
 exports.createUser = function (req, res) {
     var user = new User(req.body);
+    user.provider = 'local'
     user.save(function (err) {
         if (err) {
             return res.render('/', { errors: err.errors, user: user })
@@ -22,8 +23,6 @@ exports.createUser = function (req, res) {
 };
 
 
-/*
-*
-* Need Passport JS
-*
-* */
+exports.session = function (req, res) {
+    res.send(200, { user: req.user ? req.user : {} });
+};
