@@ -19,9 +19,6 @@ module.exports = function (app, passport, auth) {
 
     app.get('/auth/steam/return',
         passport.authenticate('steam', { failureRedirect: '/login' }),
-        function(req, res) {
-            // Successful authentication, redirect home.
-            res.redirect('/');
-        });
+        userController.session);
 
 };

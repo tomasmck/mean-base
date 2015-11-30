@@ -8,15 +8,21 @@ var fs = require('fs');
 var passport = require('passport');
 var auth = require('./config/middlewares/authorization');
 
+var env = process.env.NODE_ENV || process.env.MONGOLAB_URI || 'development'
+    , config = require('./config/config')[env]
+    , mongoose = require('mongoose');
+
+
 // Bootstrap models
 var models_path = __dirname + '/app/models';
 fs.readdirSync(models_path).forEach(function (file) {
   require(models_path+'/'+file)
 });
 
-
-
 var app = express();
+
+// express settings
+require('./config/express')(app, config, passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,8 +38,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+
 require('./config/passport')(passport);
 var routes = require('./routes/index')(app, passport, auth);
+var games = require('./routes/games')(app, passport, auth);
 var users = require('./routes/users')(app, passport, auth);
 
 // Bootstrap routes
