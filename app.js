@@ -9,9 +9,7 @@ var passport = require('passport');
 var auth = require('./config/middlewares/authorization');
 
 var env = process.env.NODE_ENV || process.env.MONGOLAB_URI || 'development'
-    , config = require('./config/config')[env]
-    , mongoose = require('mongoose');
-
+    , config = require('./config/config')[env];
 
 // Bootstrap models
 var models_path = __dirname + '/app/models';
@@ -30,27 +28,11 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-
 
 require('./config/passport')(passport);
-var routes = require('./routes/index')(app, passport, auth);
-var games = require('./routes/games')(app, passport, auth);
-var users = require('./routes/users')(app, passport, auth);
-
-// Bootstrap routes
-//require('./routes')(app, passport, auth);
-
-//app.use('/', routes);
-//app.use('/users', users);
+require('./routes/index')(app, passport, auth);
+require('./routes/games')(app, passport, auth);
+require('./routes/users')(app, passport, auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

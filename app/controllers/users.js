@@ -24,5 +24,5 @@ exports.createUser = function (req, res) {
 
 
 exports.session = function (req, res) {
-    res.send(200, { user: req.user ? req.user : {} });
+    res.redirect('/#!/games');
 };

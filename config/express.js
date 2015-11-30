@@ -7,6 +7,7 @@ var express = require('express'),
     expressSession = require('express-session'),
     mongoStore = require('connect-mongo')(expressSession),
     flash = require('connect-flash'),
+    path = require('path'),
     helpers = require('view-helpers');
 
 var session = require('express-session');
@@ -44,10 +45,9 @@ module.exports = function (app, config, passport) {
     // cookieParser should be above session
     app.use(express.cookieParser())
 
-    // bodyParser should be above methodOverride
-    
     app.use(express.methodOverride())
     app.use(express.bodyParser({uploadDir:'public/uploads'}));
+    app.use(express.static(path.join(__dirname, 'public')));
 
     // express/mongo session storage
     app.use(express.session({
@@ -62,8 +62,8 @@ module.exports = function (app, config, passport) {
     app.use(flash())
 
     // use passport session
-    app.use(passport.initialize())
-    app.use(passport.session())
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     // routes should be at the last
     app.use(app.router)

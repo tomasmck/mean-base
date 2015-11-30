@@ -5,7 +5,7 @@ var async = require('async');
 module.exports = function (app, passport, auth) {
 
   app.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('index', {  });
   });
 
 };

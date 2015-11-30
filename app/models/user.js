@@ -10,6 +10,7 @@ var UserSchema = new Schema({
     username: { type: String, unique: true },
     provider: String,
     hashed_password: String,
+    openId: String,
     salt: String
 });
 
@@ -67,7 +68,7 @@ UserSchema.methods = {
     },
 
     encryptPassword: function(password) {
-        if (!password) return ''
+        if (!password) return '';
         return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
     }
 };
@@ -76,4 +77,4 @@ UserSchema.statics.findByOpenID = function (openId, cb) {
     this.find({ openId: openId }, cb);
 };
 
-mongoose.model('User', UserSchema)
+mongoose.model('User', UserSchema);
