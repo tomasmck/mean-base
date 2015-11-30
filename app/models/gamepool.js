@@ -4,7 +4,11 @@ var mongoose = require('mongoose')
     , Schema = mongoose.Schema;
 
 var GamePoolSchema = new Schema({
-    player: { type: Schema.ObjectId, ref: 'User' },
+    name: { type: String },
+    title: { type: String },
+    description: { type: String },
+    entryCost: { type: Number },
+    players: [{ type: Schema.ObjectId, ref: 'User' }],
     joinedOn: { type: Date, default: Date.now }
 });
 

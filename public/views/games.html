@@ -1,3 +1,19 @@
 <div id="site-wrapper">
    Games
+
+   <div>
+      <a ng-click="joinGamePool()">Find Game</a>
+      <br />
+      <span ng-show="gameJoined === true">Joined</span>
+      <br />
+      <br />
+      <br />
+      <div ng-show="showSuccessfulMatch === true">
+         <b>Match Found</b>
+         <div>
+            * Competitor: johndoe123
+            * Prize: €10
+         </div>
+      </div>
+   </div>
 </div>

@@ -9,7 +9,7 @@ window.app.config(['$routeProvider', function($routeProvider) {
 		.when('/games',
 		{
 			templateUrl: 'views/games.html',
-			controller: 'HomeController'
+			controller: 'GameController'
 		})
 	.otherwise({redirectTo: '/'});
 }]).factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
