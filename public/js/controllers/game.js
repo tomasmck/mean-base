@@ -1,4 +1,4 @@
-window.angular.module('reflex.controllers.home', [])
+window.angular.module('reflex.controllers.game', [])
     .controller('GameController', ['$scope', '$routeParams', '$location', 'global',
         function ($scope, $routeParams, $location, global) {
             $scope.user = global.getUser();
