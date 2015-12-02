@@ -25,7 +25,7 @@ module.exports = function (passport, config) {
       },
       function(identifier, profile, done) {
           //profile.identifier = identifier;
-          User.findOne({ steamProfile: profile._json }, function(err, user) {
+          User.findOne({ 'steamProfile.steamid': profile._json.steamid }, function(err, user) {
               if (err) {
                   console.log("Error finding user: " + err);
                   return done(err);
