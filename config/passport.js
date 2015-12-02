@@ -3,7 +3,6 @@ var mongoose = require('mongoose')
   , SteamStrategy = require('passport-steam').Strategy
   , User = mongoose.model('User');
 
-
 module.exports = function (passport, config) {
   // require('./initializer')
 
@@ -19,8 +18,8 @@ module.exports = function (passport, config) {
     });
 
   passport.use(new SteamStrategy({
-        returnURL: 'http://localhost:4000/auth/steam/return',
-        realm: 'http://localhost:4000/',
+        returnURL: config.app.rootURL + config.app.passportSteamReturnURL,
+        realm: config.app.rootURL,
         apiKey: '901CD13A7078AF1D41E9763CB3D5E384'
       },
       function(identifier, profile, done) {

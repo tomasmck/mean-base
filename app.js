@@ -34,7 +34,7 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-require('./config/passport')(passport);
+require('./config/passport')(passport, config);
 require('./routes/index')(app, passport, auth);
 require('./routes/games')(app, passport, auth);
 require('./routes/users')(app, passport, auth);

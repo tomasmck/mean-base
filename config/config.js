@@ -17,7 +17,9 @@ module.exports = {
     root: rootPath,
     notifier: notifier,
     app: {
-      name: 'Reflex - Development Mode'
+        name: 'Reflex - Development Mode',
+        rootURL: 'http://localhost:4000',
+        passportSteamReturnURL: '/auth/steam/return'
     }
   },
   staging: {
@@ -33,7 +35,9 @@ module.exports = {
     root: rootPath,
     notifier: notifier,
     app: {
-      name: 'Reflex'
+        name: 'Reflex',
+        rootURL: 'http://reflexgaming.herokuapp.com',
+        passportSteamReturnURL: '/auth/steam/return'
     }
   }
 };
