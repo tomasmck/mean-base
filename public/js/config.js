@@ -9,7 +9,10 @@ window.app.config(['$routeProvider', function($routeProvider) {
 		.when('/games',
 		{
 			templateUrl: 'views/games.html',
-			controller: 'GameController'
+			controller: 'GameController',
+			resolve: {
+				loggedin: checkLoggedin
+			}
 		})
 	.otherwise({redirectTo: '/'});
 }]).factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
@@ -44,3 +47,19 @@ window.app.config(['$locationProvider', function($locationProvider) {
     //$locationProvider.html5Mode(true);
     $locationProvider.hashPrefix("!");
 }]);
+
+var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, global){
+	var deferred = $q.defer();
+	$http.get('/loggedin').success( function(user) {
+		if (user !== '0') {
+			deferred.resolve();
+			global.setUser(user);
+		}
+		else {
+			$rootScope.message = 'You need to log in.';
+			deferred.reject();
+			$location.url('/login');
+		}
+	});
+	return deferred.promise;
+};

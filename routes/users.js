@@ -5,6 +5,10 @@ var async = require('async');
 
 module.exports = function (app, passport, auth) {
 
+    app.get('/loggedin', function(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+        });
+
     app.get('/auth/steam',
         passport.authenticate('steam'),
         function(req, res) {
@@ -13,7 +17,10 @@ module.exports = function (app, passport, auth) {
         });
 
     app.get('/auth/steam/return',
-        passport.authenticate('steam', { successRedirect: '/#!/games',
-            failureRedirect: '/' }));
+        passport.authenticate('steam',
+            {
+                successRedirect: '/#!/games',
+                failureRedirect: '/'
+            }));
 
 };

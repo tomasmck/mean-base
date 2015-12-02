@@ -1,6 +1,7 @@
 window.angular.module('reflex.controllers.home', [])
     .controller('GameController', ['$scope', '$routeParams', '$location', 'global',
-        function ($scope, $routeParams, $location, Global) {
+        function ($scope, $routeParams, $location, global) {
+            $scope.user = global.getUser();
 
             $scope.initGamePage = function() {
 

@@ -2,7 +2,7 @@ window.angular.module('reflex.services.global', [])
   .factory('global', function() {
   	var current_user = window.user;
     return {
-      currentUser: function() {
+      getUser: function() {
         return current_user;
       },
       isSignedIn: function() {
