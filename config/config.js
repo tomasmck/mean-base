@@ -29,7 +29,7 @@ module.exports = {
     }
   },
   production: {
-    db: 'mongodb://reflexBgngbh66:Gthtgy66@ds055842.mongolab.com:55842/heroku_j4dsb64g',
+    db: 'mongodb://reflexdbuser:Hyjyhu77!@ds055842.mongolab.com:55842/heroku_j4dsb64g',
     root: rootPath,
     notifier: notifier,
     app: {

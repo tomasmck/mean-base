@@ -6,6 +6,7 @@
     "node": "0.10.x"
   },
   "scripts": {
+    "postinstall": "bower install",
     "start": "node ./bin/www",
     "test": "./node_modules/.bin/jasmine-node spec"
   },
