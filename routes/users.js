@@ -5,11 +5,6 @@ var async = require('async');
 
 module.exports = function (app, passport, auth) {
 
-    app.post('/api/users/session', passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/'
-    }));
-
     app.get('/auth/steam',
         passport.authenticate('steam'),
         function(req, res) {
@@ -18,7 +13,7 @@ module.exports = function (app, passport, auth) {
         });
 
     app.get('/auth/steam/return',
-        passport.authenticate('steam', { failureRedirect: '/login' }),
-        userController.session);
+        passport.authenticate('steam', { successRedirect: '/#!/games',
+            failureRedirect: '/' }));
 
 };

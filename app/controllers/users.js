@@ -21,8 +21,3 @@ exports.createUser = function (req, res) {
         })
     })
 };
-
-
-exports.session = function (req, res) {
-    res.redirect('/#!/games');
-};

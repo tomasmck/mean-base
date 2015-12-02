@@ -5,11 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var passport = require('passport');
+
 var auth = require('./config/middlewares/authorization');
 
 var env = process.env.NODE_ENV || process.env.MONGOLAB_URI || 'development'
-    , config = require('./config/config')[env];
+    , config = require('./config/config')[env]
+    , mongoose = require('mongoose');
 
 // Bootstrap models
 var models_path = __dirname + '/app/models';
@@ -17,6 +18,10 @@ fs.readdirSync(models_path).forEach(function (file) {
   require(models_path+'/'+file)
 });
 
+// Bootstrap db connection
+var db = mongoose.connect(config.db)
+
+var passport = require('passport');
 var app = express();
 
 // express settings

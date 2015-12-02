@@ -56,7 +56,7 @@ module.exports = function (app, config, passport) {
         url: config.db,
         collection : 'sessions'
       })
-    }))
+    }));
 
     // connect flash for flash messages
     app.use(flash())
